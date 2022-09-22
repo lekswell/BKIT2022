@@ -52,20 +52,33 @@ def get_roots(a, b, c):
     result = []
     D = b*b - 4*a*c
     if D == 0.0:
-        root1 = math.sqrt(-b / (2.0*a))
-        root2 = -math.sqrt(-b / (2.0*a))
-        result.append(root1)
-        result.append(root2)
+        if ((-b / (2.0*a)) >= 0):
+            root1 = math.sqrt(-b / (2.0*a))
+            root2 = -root1;
+            if root1==0:
+                result.append(root1)
+            else:
+                result.append(root1)
+                result.append(root2)
     elif D > 0.0:
         sqD = math.sqrt(D)
-        root1 = math.sqrt((-b + sqD) / (2.0*a))
-        root2 = -math.sqrt((-b + sqD) / (2.0*a))
-        root3 = math.sqrt((-b - sqD) / (2.0*a))
-        root4 = -math.sqrt((-b - sqD) / (2.0*a))
-        result.append(root1)
-        result.append(root2)
-        result.append(root3)
-        result.append(root4)
+        if (((-b + sqD) / (2.0*a)) >= 0):
+            root1 = math.sqrt((-b + sqD) / (2.0*a))
+            root2 = -root1
+            if root1==0:
+                result.append(root1)
+            else:
+                result.append(root1)
+                result.append(root2)
+        if (((-b - sqD) / (2.0*a)) >= 0):
+            root3 = math.sqrt((-b - sqD) / (2.0*a))
+            root4 = -root3
+            if root3==0:
+                result.append(root3)
+            else:
+                result.append(root3)
+                result.append(root4)
+        
     return result
 
 
@@ -82,8 +95,12 @@ def main():
     len_roots = len(roots)
     if len_roots == 0:
         print('Нет корней')
+    elif len_roots == 1:
+        print('Один корень: {}'.format(roots[0]))
     elif len_roots == 2:
         print('Два корня: {} и {}'.format(roots[0], roots[1]))
+    elif len_roots == 3:
+        print('Три корня: {}, {} и {}'.format(roots[0], roots[1], roots[2]))
     elif len_roots == 4:
         print('Четыре корня: {} , {} , {} и {}'.format(roots[0], roots[1], roots[2], roots[3]))
     
@@ -94,3 +111,4 @@ if __name__ == "__main__":
 
 # Пример запуска
 # lab1.py 1 -5 6
+
